@@ -2,10 +2,10 @@ local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
 
-lsp.ensure_installed({
+lsp.setup_servers({
 	'tsserver',
 	'eslint',
-	'sumneko_lua'
+	'lua_ls',
 })
 
 local cmp = require('cmp')
@@ -37,4 +37,3 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
-
