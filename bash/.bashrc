@@ -145,9 +145,9 @@ fi
 
 
 # Automatically open terminal in a `tmux` session
-# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-#   exec tmux -2 new -s $USER
-# fi
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux -2 new -s $USER
+fi
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
