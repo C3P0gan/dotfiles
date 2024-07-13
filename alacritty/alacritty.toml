@@ -135,7 +135,7 @@ mods = "Shift"
 history = 5000
 
 [window]
-decorations = "full"
+decorations = "None"  # "Full" | "None"
 dynamic_padding = false
 opacity = 0.89
 startup_mode = "Maximized"
