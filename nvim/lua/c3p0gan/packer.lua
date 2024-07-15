@@ -26,6 +26,8 @@ return require('packer').startup(function(use)
     use('theprimeagen/harpoon')
     use('mbbill/undotree')
     use('tpope/vim-fugitive')
+    use('tpope/vim-surround')
+    use('tpope/vim-repeat')
 
     use {
         'VonHeikemen/lsp-zero.nvim',
@@ -46,10 +48,6 @@ return require('packer').startup(function(use)
             -- Snippets
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
-
-            -- tpope
-            { 'tpope/vim-surround' },
-            { 'tpope/vim-repeat' }
         }
     }
 
