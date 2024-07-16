@@ -2,6 +2,11 @@ require('mason').setup()
 require('mason-lspconfig').setup()
 
 local lsp = require('lsp-zero')
+local lsp_config = require('lspconfig')
+
+local function setup_servers()
+    lsp_config.pylsp.setup{}
+end
 
 lsp.preset('recommended')
 
@@ -41,3 +46,4 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
+setup_servers()
