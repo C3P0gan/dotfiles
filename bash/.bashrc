@@ -146,7 +146,7 @@ fi
 
 # Automatically open terminal in a `tmux` session
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux -2 new -s $USER
+  exec tmux -2 new -As $USER
 fi
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -257,7 +257,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# alias ls='exa -al --color=always --group-directories-first'
+alias ls='exa -al --color=always --group-directories-first'
+alias tmux='tmux -2'
+
+setxkbmap -option caps:escape
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -267,4 +270,3 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-alias tmux='tmux -2'

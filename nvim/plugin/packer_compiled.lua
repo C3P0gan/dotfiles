@@ -129,14 +129,6 @@ _G.packer_plugins = {
     path = "/home/cristoffer_pogan/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
-  neocodeium = {
-    config = { "\27LJ\2\2r\0\0\5\0\t\0\r6\0\0\0'\1\1\0B\0\2\0029\1\2\0B\1\1\0016\1\3\0009\1\4\0019\1\5\1'\2\6\0'\3\a\0009\4\b\0B\1\4\1K\0\1\0\vaccept\n<A-f>\6i\bset\vkeymap\bvim\nsetup\15neocodeium\frequire\0" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/cristoffer_pogan/.local/share/nvim/site/pack/packer/opt/neocodeium",
-    url = "https://github.com/monkoose/neocodeium"
-  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/cristoffer_pogan/.local/share/nvim/site/pack/packer/start/nvim-cmp",
