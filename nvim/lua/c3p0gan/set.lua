@@ -32,4 +32,4 @@ vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "
 
-vim.g.python3_host_prog="home/cristoffer_pogan/miniconda3/envs/pynvim/bin/pyton"
+vim.g.python3_host_prog="home/cristoffer_pogan/miniconda3/envs/pynvim/bin/python"

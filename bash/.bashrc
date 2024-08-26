@@ -203,7 +203,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    #alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -238,6 +238,8 @@ fi
 
 alias ls='exa -al --color=always --group-directories-first'
 alias tmux='tmux -2'
+alias vim='nvim'
+alias n='nvim -c "Telescope oldfiles"'
 
 setxkbmap -option caps:escape
 
@@ -249,3 +251,21 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/cristoffer_pogan/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/cristoffer_pogan/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/cristoffer_pogan/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/cristoffer_pogan/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# change background automatically
+gsettings set org.gnome.desktop.background picture-uri-dark file:///home/cristoffer_pogan/Bilder/Hintergrund/cat-colorful-animal-digital-art-4k-wallpaper-uhdpaper.com-888@1@m.jpg
+export PATH=$HOME/.local/bin:$PATH

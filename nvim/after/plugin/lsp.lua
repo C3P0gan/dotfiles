@@ -14,7 +14,8 @@ lsp.setup_servers({
 	'tsserver',
 	'eslint',
 	'lua_ls',
-    'rust_analyzer'
+    'rust_analyzer',
+    'gopls'
 })
 
 local cmp = require('cmp')
