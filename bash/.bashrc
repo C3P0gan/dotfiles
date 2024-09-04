@@ -9,7 +9,7 @@ export OSH='/home/cristoffer_pogan/.oh-my-bash'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="font"
+OSH_THEME="axin"
 
 # If you set OSH_THEME to "random", you can ignore themes you don't like.
 # OMB_THEME_RANDOM_IGNORED=("powerbash10k" "wanelo")
@@ -267,5 +267,6 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # change background automatically
-gsettings set org.gnome.desktop.background picture-uri-dark file:///home/cristoffer_pogan/Bilder/Hintergrund/cat-colorful-animal-digital-art-4k-wallpaper-uhdpaper.com-888@1@m.jpg
+gsettings set org.gnome.desktop.background picture-uri-dark file:///home/cristoffer_pogan/Bilder/Hintergrund/gojo-satoru-jujutsu-kaisen-4k-wallpaper-uhdpaper.com-204@2@a.jpg
+
 export PATH=$HOME/.local/bin:$PATH
