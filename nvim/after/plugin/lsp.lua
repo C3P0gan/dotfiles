@@ -1,50 +1,87 @@
+-- Mason setup
 require('mason').setup()
-require('mason-lspconfig').setup()
 
-local lsp = require('lsp-zero')
-local lsp_config = require('lspconfig')
-
-local function setup_servers()
-    lsp_config.pylsp.setup{}
-end
-
-lsp.preset('recommended')
-
-lsp.setup_servers({
-	'tsserver',
-	'eslint',
-	'lua_ls',
-    'rust_analyzer',
-    'gopls'
+-- mason-lspconfig: automatically install servers and set them up with native config
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        'ts_ls',
+        'eslint',
+        'lua_ls',
+        'rust_analyzer',
+        'gopls',
+        'pylsp',
+        'jdtls'
+    },
+    handlers = {
+        -- The default handler: create a minimal vim.lsp.config entry and enable the server
+        function(server_name)
+            -- You can add server-specific settings here later if needed
+            vim.lsp.config(server_name, {})
+            vim.lsp.enable(server_name)
+        end,
+    },
 })
 
+-- nvim-cmp setup (auto-completion)
 local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-	['<C-y>'] = cmp.mapping.confirm({ select = true }),
-	["<C-Space>"] = cmp.mapping.complete(),
+cmp.setup({
+    mapping = cmp.mapping.preset.insert({
+        ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-Space>'] = cmp.mapping.complete(),
+    }),
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'path' },
+        { name = 'buffer' },
+    }),
 })
 
-lsp.set_preferences({
-	sign_icons = { }
+-- Global LSP keymaps and formatting on attach
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        local bufnr = args.buf
+
+        -- Keymaps
+        local opts = { buffer = buffnr, remap = false }
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
+        vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
+        vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
+        vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
+        vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action, opts)
+        vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references, opts)
+        vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename, opts)
+        vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+
+        -- Formatting keymap (if server supports it)
+        if client:supports_method('textDocument/implementation') then
+            vim.keymap.set('n', '<space>f', function()
+                vim.lsp.buf.format({ async = true })
+            end, opts)
+        end
+
+        -- Enable LSP completion (NeoVim 0.11 built-in completion can be enabled with this)
+        if client:supports_method('textDocument/completion') then
+            vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
+        end
+    end,
 })
 
-lsp.on_attach(function(client, bufnr)
-	local opts = {buffer = bufnr, remap = false}
-
-	vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-	vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-	vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-	vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-	vim.keymap.set("n", "]d", function() vim.disgnostic.goto_prev() end, opts)
-	vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-	vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-	vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-end)
-
-lsp.setup()
-setup_servers()
+-- (Optional) Format on save – uncomment if you want it
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   callback = function(args)
+--     local client = vim.lsp.get_client_by_id(args.data.client_id)
+--     if client:supports_method('textDocument/formatting') then
+--       vim.api.nvim_create_autocmd('BufWritePre', {
+--         buffer = args.buf,
+--         callback = function()
+--           vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+--         end,
+--       })
+--     end
+--   end,
+-- })

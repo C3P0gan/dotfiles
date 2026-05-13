@@ -32,4 +32,18 @@ vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "
 
+vim.g.netrw_keepdir = 0
+
+vim.g.netrw_banner = 0
+vim.g.netrw_localrmdir = "rm -r"
+vim.g.netrw_bufsettings = "noma nomod nu rnu nobl nowrap ro"
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function()
+        vim.api.nvim_set_hl(0, "LineNr", { fg = "#f8f8f2" })
+        vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#ad8be3" })
+        vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#ff79c6" })
+    end
+})
+
 vim.g.python3_host_prog="home/cristoffer_pogan/miniconda3/envs/pynvim/bin/python"
