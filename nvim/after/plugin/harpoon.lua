@@ -1,5 +1,9 @@
 local harpoon = require("harpoon")
 
+harpoon.get_root = function()
+    return vim.env.HOME .. "/.config/nvim"
+end
+
 -- REQUIRED
 harpoon:setup()
 -- REQUIRED

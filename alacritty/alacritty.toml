@@ -138,7 +138,7 @@ history = 5000
 decorations = "None"  # "Full" | "None"
 dynamic_padding = false
 opacity = 0.89
-startup_mode = "Maximized"
+startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen"
 title = "Alacritty"
 
 [window.class]

@@ -4,14 +4,17 @@ return require('packer').startup(function(use)
     use 'nvim-lua/plenary.nvim'
 
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.8',
+        'nvim-telescope/telescope.nvim', version = '0.2.2',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
     use {
         'ThePrimeagen/harpoon',
         branch = 'harpoon2',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        requires = {
+            'nvim-lua/plenary.nvim',
+            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+        }
     }
 
     use({
@@ -27,6 +30,7 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
+    use('mattn/emmet-vim')
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use('nvim-treesitter/playground')
     use('mbbill/undotree')
