@@ -32,14 +32,10 @@ return require('packer').startup(function(use)
 
     use('mattn/emmet-vim')
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-    use('nvim-treesitter/playground')
     use('mbbill/undotree')
     use('tpope/vim-fugitive')
     use('tpope/vim-surround')
     use('tpope/vim-repeat')
-    use { 'akinsho/toggleterm.nvim', tag = '*', config = function()
-        require('toggleterm').setup()
-    end }
 
     -- LSP, Mason, completion
     use {
