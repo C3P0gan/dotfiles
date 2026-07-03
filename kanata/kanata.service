@@ -1,0 +1,19 @@
+[Unit]
+Description=Kanata keyboard remapper
+Documentation=https://github.com/jtroo/kanata
+Wants=local-fs.target
+After=local-fs.target
+
+[Service]
+Type=simple
+ExecStartPre=/usr/sbin/modprobe uinput
+ExecStart=/usr/local/bin/kanata --cfg /home/<username>/.config/kanata/config.kbd --no-wait
+Restart=on-failure
+RestartSec=3
+
+# Run as root (required for uinput).
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
