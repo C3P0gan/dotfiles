@@ -154,7 +154,7 @@ return {
             setup_lua()
 
             vim.api.nvim_create_autocmd("LspAttach", {
-                callback = on_attach(),
+                callback = on_attach,
             })
         end,
     },
