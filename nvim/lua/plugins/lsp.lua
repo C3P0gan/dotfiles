@@ -126,7 +126,7 @@ local function setup_python()
 
     vim.lsp.enable({
         "ruff",
-        "pylsp",
+        -- "pylsp",
         "basedpyright",
     })
 end
