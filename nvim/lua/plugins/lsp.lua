@@ -147,6 +147,11 @@ return {
     {
         "neovim/nvim-lspconfig",
 
+        event = {
+            "BufReadPre",
+            "BufNewFile",
+        },
+
         config = function()
             setup_defaults()
 

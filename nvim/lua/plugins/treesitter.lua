@@ -16,37 +16,38 @@ local function parsers()
     }
 end
 
-local function treesitter_opts()
-    return {
-        ensure_installed = parsers(),
+local function install_parsers()
+    local ts = require("nvim-treesitter")
 
-        auto_install = true,
+    local installed = ts.get_installed()
 
-        highlight = {
-            enable = true,
-        },
+    local missing = vim.tbl_filter(function(lang)
+        return not vim.tbl_contains(installed, lang)
+    end, parsers())
 
-        indent = {
-            enable = true,
-        },
-    }
+    if #missing > 0 then
+        ts.install(missing)
+    end
+end
+
+local function setup()
+    local ts = require("nvim-treesitter")
+
+    ts.setup()
+
+    install_parsers()
 end
 
 return {
     {
         "nvim-treesitter/nvim-treesitter",
 
-        build = ":TSUpdate",
+        lazy = false,
 
-        event = {
-            "BufReadPost",
-            "BufNewFile",
-        },
-
-        opts = treesitter_opts(),
-
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
+        build = function()
+            require("nvim-treesitter").update()
         end,
+
+        config = setup,
     },
 }
