@@ -9,7 +9,7 @@ return {
         "nvim-telescope/telescope.nvim",
 
         version = false,
-        branch = "0.1.x",
+        branch = "master",
 
         cmd = {
             "Telescope",
