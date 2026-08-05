@@ -18,13 +18,16 @@ return {
                     ["<C-p>"] = cmp.mapping.select_prev_item({
                         behavior = cmp.SelectBehavior.Select,
                     }),
+
                     ["<C-n>"] = cmp.mapping.select_next_item({
                         behavior = cmp.SelectBehavior.Select,
                     }),
+
                     ["<C-y>"] = cmp.mapping.confirm({
                         select = true,
                     }),
-                    ["<C-Space>"] = cmp.mapping.complete(),
+
+                    ["<C-l>"] = cmp.mapping.complete(),
                 }),
 
                 sources = cmp.config.sources({
